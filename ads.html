@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broker SMM | خدمة البروفايل الرقمي الاحترافي</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ======== إعدادات أساسية ومتغيرات الألوان ======== */
+        :root {
+            --bg-color: #10101a;
+            --bg-dark: #0d0d15;
+            --purple: #8A2BE2; /* بنفسجي */
+            --gold: #FFD700;   /* ذهبي ملكي */
+            --text-color: #f0f0f0;
+            --card-bg: rgba(26, 26, 46, 0.4);
+        }
+
+        /* ===== إصلاح مشكلة عدم الثبات ===== */
+        html, body {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Almarai', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px; /* تم تعديل padding */
+        }
+
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+
+        /* ======== الأقسام العامة ======== */
+        .section { padding: 80px 0; }
+        .bg-dark { background-color: var(--bg-dark); }
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            line-height: 1.7;
+        }
+
+        /* ======== قسم المقدمة (Hero) ======== */
+        .hero {
+            min-height: 80vh; /* تم تقليل الارتفاع */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(13, 13, 21, 0.8), rgba(16, 16, 26, 1)), url(https://images.unsplash.com/photo-1554446422-d05db23719c2?q=80&w=2070) no-repeat center center/cover;
+            padding: 60px 0;
+        }
+        .hero-content {
+            max-width: 800px;
+        }
+        .hero-title {
+            font-size: clamp(2.2rem, 8vw, 3.5rem); /* خط مرن يتناسب مع حجم الشاشة */
+            font-weight: 800;
+            text-shadow: 0 0 20px var(--purple);
+            line-height: 1.3;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 4vw, 1.2rem); /* خط مرن */
+            color: #ddd;
+            margin: 20px 0 40px 0;
+        }
+        .hero-buttons a {
+            margin: 10px 10px;
+        }
+
+        /* ======== الأزرار ======== */
+        .cta-button {
+            display: inline-block; /* لضمان تطبيق الهوامش بشكل صحيح */
+            background: var(--gold);
+            color: #10101a;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 2px solid var(--gold);
+            transition: all 0.3s;
+        }
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+            background-color: transparent;
+            color: var(--gold);
+        }
+        .cta-button.large { padding: 20px 50px; font-size: 1.2rem; }
+        .secondary-button {
+            display: inline-block; /* لضمان تطبيق الهوامش بشكل صحيح */
+            background: transparent;
+            color: var(--text-color);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 2px solid #555;
+            transition: all 0.3s;
+        }
+        .secondary-button:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+        }
+
+        /* ======== قسم الحل ======== */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+        .solution-image img {
+            max-width: 100%;
+            border-radius: 20px;
+        }
+
+        /* ======== قسم الأفضليات ======== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+        .feature-card .icon { font-size: 3rem; color: var(--purple); margin-bottom: 20px; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+
+        /* ======== قسم العرض الخاص ======== */
+        .offer-card {
+            background: linear-gradient(45deg, var(--purple), #5a1196);
+            border-radius: 20px;
+            text-align: center;
+            padding: 60px 25px; /* تم تعديل padding */
+            box-shadow: 0 0 50px rgba(138, 43, 226, 0.5);
+        }
+        .offer-icon { font-size: 3.5rem; margin-bottom: 20px; }
+        .offer-title { font-size: 2.5rem; margin-bottom: 20px; color: var(--gold); }
+        .offer-text { font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px; }
+
+        /* ======== التذييل ======== */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--bg-dark);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            color: #888;
+        }
+
+        /* ======== التجاوب مع الشاشات الصغيرة (تم تحسينه بشكل كبير) ======== */
+        @media (max-width: 768px) {
+            .section { padding: 60px 0; }
+            .section-title { font-size: 2rem; }
+            .solution-grid, .features-grid { grid-template-columns: 1fr; }
+            .solution-grid { text-align: center; }
+            .solution-text .section-title { text-align: center; }
+            .hero-buttons { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+            .hero-buttons a { width: 80%; max-width: 300px; }
+            .offer-card { padding: 40px 20px; }
+            .offer-title { font-size: 2rem; }
+            .offer-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title" data-aos="fade-up">حوّل حضورك الرقمي إلى تحفة فنية</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+                امتلك بروفايل رقمي احترافي يجمع كل روابطك وخدماتك في مكان واحد، بتصميم ملكي وجذاب يترك انطباعًا لا يُنسى.
+            </p>
+            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                <a href="#offer" class="cta-button">اطلب بروفايلك الآن</a>
+                <a href="https://profile.brokersmm.com" target="_blank" class="secondary-button">شاهد المثال الحي</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container text-center">
+                <h2 class="section-title" data-aos="fade-up">هل سئمت من فوضى الروابط؟</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    في كل مرة ترسل لعملائك رابط واتساب، ثم رابط انستغرام، ثم رابط آخر... هذا يشتت الانتباه ويقلل من احترافيتك.
+                </p>
+            </div>
+        </section>
+
+        <section class="section bg-dark">
+            <div class="container solution-grid">
+                <div class="solution-text" data-aos="fade-left">
+                    <h2 class="section-title text-right">الحل: رابط واحد. QR Code واحد. احترافية مطلقة.</h2>
+                    <p>تخيل أن كل هويتك الرقمية موجودة في مكان واحد! يمكنك تحويل بروفايلك إلى QR Code وتضعه في محلك، سيارتك، أو بطاقتك الشخصية. أي شخص يقوم بمسحه يصل إليك فورًا. هذه هي قوة البساطة.</p>
+                </div>
+                <div class="solution-image" data-aos="fade-right">
+                    <img src="images/viewprof.png" alt="QR Code Concept">
+                </div>
+                                <div class="solution-image" data-aos="fade-right">
+                    <img src="images/qr-code.png" alt="QR Code Concept">
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title text-center" data-aos="fade-up">لماذا هذا البروفايل هو خيارك الأفضل؟</h2>
+                <div class="features-grid">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon"><i class="fas fa-crown"></i></div>
+                        <h3>مظهر احترافي</h3>
+                        <p>بدلًا من الروابط المشتتة، تمنح انطباعًا بالثقة والجودة من النظرة الأولى.</p>
+                    </div>
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="icon"><i class="fas fa-link"></i></div>
+                        <h3>كل شيء في مكان واحد</h3>
+                        <p>جميع روابطك، خدماتك، ومعلوماتك في صفحة واحدة سهلة الوصول.</p>
+                    </div>
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="icon"><i class="fas fa-qrcode"></i></div>
+                        <h3>سهولة المشاركة</h3>
+                        <p>رابط واحد قصير، أو QR Code يمكنك مشاركته في أي مكان، سواء على الإنترنت أو في الواقع.</p>
+                    </div>
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="icon"><i class="fas fa-magic"></i></div>
+                        <h3>تصميم جذاب وتفاعلي</h3>
+                        <p>تصميم عصري يحتوي على حركات تفاعلية، على عكس الصفحات التقليدية المملة.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-dark" id="offer">
+            <div class="container offer-card" data-aos="zoom-in">
+                <div class="offer-icon">🔥</div>
+                <h2 class="offer-title">عرض إطلاق لا يقاوم!</h2>
+                <p class="offer-text">
+                    الأثمنة تبدأ من 30 دراهم فقط! ولكن... لأول 20 شخص يتواصل معي، سيحصل على الشهرين الأولين كاملًةً **بـ30 دراهم فقط!**
+                </p>
+                <a href="https://wa.me/message/PH7PSUTH25NZH1" target="_blank" class="cta-button large">كن من الأوائل! تواصل معي الآن</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 - جميع الحقوق محفوظة لـ Broker SMM</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <script>
+        // تهيئة مكتبة Animate On Scroll (لظهور العناصر عند التمرير)
+        AOS.init({
+            duration: 800, // مدة الحركة بالمللي ثانية
+            once: true,    // الحركة تحدث مرة واحدة فقط
+            offset: 50,    // تم تقليل المسافة لتبدأ الحركة أسرع
+        });
+    </script>
+</body>
+</html>
