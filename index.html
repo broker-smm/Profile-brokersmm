@@ -1,120 +1,1192 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Broker SMM | خبير خدمات رقمية</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Personal Profile - Broker SMM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        :root {
+            /* Portal Colors */
+            --library-color: #c9b068; --music-color: #1DB954; --travel-color: #00a2ff; --passion-color: #e44d26; --hobbies-color: #9b59b6; --skills-color: #FF6B6B;
+            /* Social Colors (Updated) */
+            --instagram-color: #E4405F;
+            --whatsapp-color: #25D366;
+            --facebook-color: #1877F2;
+            --fiverr-color: #1DBF73;
+            --telegram-color: #26A5E4;
+            --twitter-color: #1DA1F2;
+        }
+
+        /* --- 1. General & Base Styles --- */
+        html { scroll-behavior: smooth; }
+        body { 
+            margin: 0; 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #0a0a1f; 
+            color: #fff; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- 2. Simple Stars Background --- */
+        .stars-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: twinkle 5s infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* --- 3. Loading Screen - IMPROVED --- */
+        #loading-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #0a0a1f;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .spinner {
+            width: 70px; 
+            height: 70px;
+            border: 5px solid rgba(255,255,255,0.1);
+            border-top: 5px solid #00d1ff;
+            border-right: 5px solid #8e44ad;
+            border-bottom: 5px solid #e44d26;
+            border-left: 5px solid #1DB954;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .spinner:before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #00d1ff;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .loading-subtext {
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            color: #ccc;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .loading-dots:after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+/* --- 4. Header Styles --- */
+.header-container { 
+    position: sticky; 
+    top: 30px;  /* زيادة من 15px إلى 25px */
+    z-index: 1000; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    transition: top 0.4s ease-in-out; /* إضافة انتقال سلس */
+}
+.smart-header { 
+    width: 85vw; 
+    padding: 1rem; 
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 16px; 
+    transition: all 0.4s ease-in-out; 
+    transform: translateZ(0); 
+}
+.header-title { 
+    font-size: 1.8rem; 
+    text-align: center; 
+    margin: 0; 
+    color: #fff; 
+    animation: pulsate-glow 3s infinite alternate; 
+    transition: font-size 0.4s ease-in-out; 
+}
+@keyframes pulsate-glow { 
+    from { text-shadow: 0 0 8px #00d1ff, 0 0 15px #00d1ff; } 
+    to { text-shadow: 0 0 15px #00d1ff, 0 0 30px #00d1ff; } 
+}
+.smart-header.scrolled { 
+    padding: 0.6rem;  /* زيادة من 0.6rem إلى 0.8rem */
+    width: 60vw; 
+    border-radius: 50px; 
+    margin-top: 10px;  /* إضافة مسافة إضافية من الأعلى */
+}
+.smart-header.scrolled .header-title { 
+    font-size: 1rem; 
+}
+        /* --- 5. Orbital Profile Picture Styles --- */
+        .orbital-gallery-container { display: flex; justify-content: center; align-items: center; padding-top: 15vh; perspective: 800px; }
+        .orbital-frame { width: 60vw; height: 60vw; max-width: 300px; max-height: 300px; border-radius: 50%; position: relative; user-select: none; box-shadow: 0 0 25px #8e44ad, 0 0 40px #8e44ad; cursor: pointer; overflow: hidden; }
+        .orbital-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transform-style: preserve-3d; backface-visibility: hidden; transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1), opacity 0.8s ease; }
+        .orbital-frame img.active { opacity: 1; transform: translateX(0) rotateY(0); z-index: 2; }
+        .orbital-frame img.next { opacity: 0; transform: translateX(120%) rotateY(-45deg); z-index: 1; }
+        .orbital-frame img.prev { opacity: 0; transform: translateX(-120%) rotateY(45deg); z-index: 1; }
+
+        /* --- 6. Portals Carousel Bar Styles - IMPROVED --- */
+        .portals-section { padding: 3rem 0 0 0; position: relative; }
+        .portals-swiper { width: 100%; height: 160px; padding: 0 10px; }
+        .portals-swiper .swiper-slide { width: 140px; height: 140px; display: flex; justify-content: center; align-items: center; }
+        .portal-card { width: 120px; height: 120px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; text-decoration: none; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.5rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateZ(0); position: relative; overflow: hidden; cursor: pointer; }
+        .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); opacity: 0; transition: opacity 0.3s ease; }
+        .portal-card i { font-size: 2.5rem; z-index: 1; transition: transform 0.3s ease; }
+        .portal-card h3 { font-family: 'Cairo', sans-serif; font-size: 0.9rem; margin: 0; z-index: 1; transition: transform 0.3s ease; }
+        .portal-card.library i { color: var(--library-color); } 
+        .portal-card.music i { color: var(--music-color); } 
+        .portal-card.travel i { color: var(--travel-color); } 
+        .portal-card.passion i { color: var(--passion-color); }
+        .portal-card.hobbies i { color: var(--hobbies-color); }
+        .portal-card.skills i { color: var(--skills-color); }
+        .portal-card:hover, .portal-card.active { transform: translateY(-10px) scale(1.05); border-color: rgba(255, 255, 255, 0.3); }
+        .portal-card:hover::before, .portal-card.active::before { opacity: 1; }
+        .portal-card:hover i, .portal-card.active i { transform: scale(1.2); }
+        .portal-card:hover h3, .portal-card.active h3 { transform: translateY(-3px); }
+        .portal-card.library:hover, .portal-card.library.active { box-shadow: 0 10px 25px var(--library-color); }
+        .portal-card.music:hover, .portal-card.music.active { box-shadow: 0 10px 25px var(--music-color); }
+        .portal-card.travel:hover, .portal-card.travel.active { box-shadow: 0 10px 25px var(--travel-color); }
+        .portal-card.passion:hover, .portal-card.passion.active { box-shadow: 0 10px 25px var(--passion-color); }
+        .portal-card.hobbies:hover, .portal-card.hobbies.active { box-shadow: 0 10px 25px var(--hobbies-color); }
+        .portal-card.skills:hover, .portal-card.skills.active { box-shadow: 0 10px 25px var(--skills-color); }
+
+        /* --- 7. Content Display Area --- */
+        .content-display-area { 
+            min-height: 0; 
+            overflow: hidden;
+            transition: all 0.5s ease;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .content-display-area.expanded {
+            min-height: 300px;
+            padding: 2rem 1rem;
+        }
+        .portal-content { 
+            display: none; 
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease;
+        }
+        .portal-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .portal-content h2 { 
+            font-size: 2rem; 
+            font-family: 'Cairo', sans-serif; 
+            text-align: center; 
+            margin: 0 0 1.5rem 0;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 1rem;
+        }
+        .portal-content p { 
+            font-family: 'Cairo', sans-serif; 
+            color: #ccc; 
+            line-height: 1.8; 
+            text-align: center; 
+            margin: 0 auto 1.5rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+        .portal-content.library h2 i { color: var(--library-color); } 
+        .portal-content.music h2 i { color: var(--music-color); } 
+        .portal-content.travel h2 i { color: var(--travel-color); } 
+        .portal-content.passion h2 i { color: var(--passion-color); }
+        .portal-content.hobbies h2 i { color: var(--hobbies-color); }
+        .portal-content.skills h2 i { color: var(--skills-color); }
+
+        /* --- 8. Content Grid for Books, Music, etc. --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .content-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .content-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .book-cover {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .content-item h3 {
+            margin: 0 0 0.5rem 0;
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .content-item .author {
+            color: #ccc;
+            font-family: 'Cairo', sans-serif;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .content-item p {
+            text-align: center;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+        
+        .music-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .music-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .music-item i {
+            font-size: 2rem;
+            color: var(--music-color);
+        }
+        
+        .music-info {
+            flex-grow: 1;
+        }
+        
+        .music-info h4 {
+            margin: 0 0 0.2rem 0;
+            color: #fff;
+        }
+        
+        .music-info p {
+            margin: 0;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .skill-name {
+            font-family: 'Cairo', sans-serif;
+            color: #fff;
+        }
+        
+        .skill-bar {
+            width: 70%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-level {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* --- 9. Featured Moments Gallery Styles --- */
+        .moments-gallery-section { padding: 2rem 0 4rem 0; }
+        .moments-gallery-section h2 { font-family: 'Cairo', sans-serif; text-align: center; font-size: 2rem; margin-bottom: 1.5rem; color: #fff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 20px rgba(0, 162, 255, 0.7); }
+        .moments-swiper { width: 100%; height: 400px; }
+        .moments-swiper .swiper-slide { width: 60vw; max-width: 280px; height: 360px; border-radius: 18px; overflow: hidden; cursor: pointer; position: relative; transform: translateZ(0) scale(0.8); opacity: 0.5; transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease; transform-origin: center center; }
+        .moments-swiper .swiper-slide-active { transform: translateZ(0) scale(1); opacity: 1; box-shadow: 0 0 35px var(--glow-color, #fff); }
+        .moments-swiper .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .moment-card-content { position: absolute; bottom: 0; left: 0; width: 100%; padding: 1.5rem 1rem 1rem 1rem; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); text-align: center; }
+        .moment-card-content h3 { font-family: 'Cairo', sans-serif; margin: 0; font-size: 1.2rem; color: #fff; }
+
+        /* --- 10. Creative Footprint (Projects) Section Styles --- */
+        .projects-section { padding: 2rem 0 4rem 0; }
+        .projects-section h2 { font-family: 'Cairo', sans-serif; text-align: center; font-size: 2rem; margin-bottom: 3rem; }
+        .projects-swiper { width: 100%; padding: 1rem 0; height: 400px; }
+        .projects-swiper .swiper-slide { width: 70vw; max-width: 300px; height: 360px; transform: translateZ(0); }
+        .project-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 0 25px var(--passion-color); }
+        .project-card-image { width: 100%; height: 70%; object-fit: cover; border-top-left-radius: 18px; border-top-right-radius: 18px; }
+        .project-card-content { padding: 1rem; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .project-card-content h3 { margin: 0 0 0.5rem 0; }
+        .project-card-content p { font-family: 'Cairo', sans-serif; font-size: 0.9rem; color: #ccc; margin: 0; }
+
+        /* --- 11. Final Contact Section Styles --- */
+        .contact-section { padding: 4rem 1.5rem; text-align: center; }
+        .contact-hub-card { max-width: 500px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 2.5rem; }
+        .contact-hub-card h2 { font-family: 'Cairo'; font-size: 1.8rem; margin: 0 0 1rem 0; }
+        .contact-hub-card p { color: #ccc; font-family: 'Cairo'; margin: 0 0 2rem 0; }
+        .social-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+        .social-btn { display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; color: #fff; background-color: rgba(255, 255, 255, 0.1); transition: all 0.3s ease; transform: translateZ(0); }
+        .social-btn i { font-size: 1.5rem; }
+        .social-btn:hover { color: #fff; transform: translateY(-5px); }
+        .social-btn.whatsapp:hover { background-color: var(--whatsapp-color); box-shadow: 0 0 15px var(--whatsapp-color); }
+        .social-btn.instagram:hover { background-color: var(--instagram-color); box-shadow: 0 0 15px var(--instagram-color); }
+        .social-btn.facebook:hover { background-color: var(--facebook-color); box-shadow: 0 0 15px var(--facebook-color); }
+        .social-btn.fiverr:hover { background-color: var(--fiverr-color); box-shadow: 0 0 15px var(--fiverr-color); }
+        .social-btn.telegram:hover { background-color: var(--telegram-color); box-shadow: 0 0 15px var(--telegram-color); }
+        .social-btn.twitter:hover { background-color: var(--twitter-color); box-shadow: 0 0 15px var(--twitter-color); }
+        .email-link { color: #ccc; text-decoration: none; font-family: 'Cairo'; }
+        .email-link:hover { color: var(--passion-color); }
+
+        /* --- 12. Lightbox Styles --- */
+        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1001; background: rgba(10, 10, 31, 0.8); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .lightbox.show { opacity: 1; pointer-events: all; }
+        .lightbox-content { text-align: center; max-width: 90vw; max-height: 90vh; overflow-y: auto; padding: 1rem; }
+        .lightbox-content .lightbox-image-container { width: 100%; max-width: 500px; margin-bottom: 1rem; }
+        .lightbox-content .lightbox-image { width: 100%; height: auto; object-fit: contain; }
+        .lightbox-caption { font-family: 'Cairo'; font-size: 1.1rem; color: #ddd; max-width: 80%; margin: 0 auto; }
+        .close-lightbox { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; color: #fff; cursor: pointer; line-height: 1; }
+
+        /* --- 13. Progress Bar --- */
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1000;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00d1ff, #8e44ad);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* --- 14. Responsive Improvements --- */
+        @media (max-width: 768px) {
+            .portals-swiper { height: 140px; }
+            .portal-card { width: 100px; height: 100px; }
+            .portal-card i { font-size: 2rem; }
+            .portal-card h3 { font-size: 0.8rem; }
+            
+            .portal-content h2 { font-size: 1.8rem; }
+            .portal-content p { font-size: 1rem; }
+            
+            .social-buttons { gap: 0.5rem; }
+            .social-btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
+            
+            .content-display-area.expanded {
+                min-height: 250px;
+                padding: 1.5rem 1rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .orbital-frame { width: 70vw; height: 70vw; }
+            .portals-swiper { height: 120px; }
+            .portal-card { width: 80px; height: 80px; }
+            .portal-card i { font-size: 1.8rem; }
+            .portal-card h3 { font-size: 0.7rem; }
+            
+            .portal-content { padding: 1.5rem; }
+            .portal-content h2 { font-size: 1.6rem; }
+            
+            .social-buttons { flex-direction: column; align-items: center; }
+            .social-btn { width: 100%; max-width: 250px; justify-content: center; }
+            
+            .content-display-area.expanded {
+                min-height: 220px;
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <header class="sticky-header">
-        <div class="container header-container">
-            <div class="logo">𝐁𝐫𝐨𝐤𝐞𝐫 𝐒𝐌𝐌</div>
-        </div>
-    </header>
-
-    <section class="hero">
-        <img src="images/brokersmm.png" alt="صورة Broker SMM الشخصية" data-aos="zoom-in" data-aos-duration="1000">
-        <p data-aos="fade-up" data-aos-delay="400">خبير في <span id="typed" class="typed-text"></span></p>
-        <div class="scroll-down-container">
-    <div class="arrow"></div>
-</div>
-اسحب للاسفل للمزيد من التفاصيل 
-    </section>
-<main class="container">
-        <section class="section" id="services">
-            <h2 class="section-title title-gold-glow" data-aos="fade-up">خدماتي</h2>
-            <div class="services-grid">
-                <div class="service-card netflix-card" data-aos="fade-up" data-aos-delay="800">
-           <div class="icon"><i class="fas fa-tv"></i></div>
-          <h3>اشتراكات Netflix</h3>
-           <p>تفعيل وتجديد اشتراكات نتفليكس الرسمية بأسعار تنافسية.</p>
-            </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="icon"><i class="fas fa-code"></i></div>
-                    <h3>تطوير المواقع</h3>
-                    <p>بناء مواقع وتطبيقات ويب حديثة ومتجاوبة تلبي جميع احتياجاتك.</p>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="icon"><i class="fas fa-bullhorn"></i></div>
-                    <h3>التسويق الرقمي</h3>
-                    <p>إدارة حملات إعلانية احترافية على منصات التواصل الاجتماعي.</p>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="icon"><i class="fas fa-server"></i></div>
-                    <h3>إدارة الخوادم</h3>
-                    <p>تركيب، إعداد، وحماية الخوادم لضمان أفضل أداء واستقرار.</p>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="icon"><i class="fas fa-users"></i></div>
-                    <h3>دعم حسابات التواصل</h3>
-                    <p>خدمات زيادة المتابعين، الإعجابات، والمشاهدات بشكل آمن وفعال.</p>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                    <div class="icon"><i class="fas fa-id-card"></i></div>
-                    <h3>تصميم البروفايلات</h3>
-                    <p>إنشاء صفحات شخصية احترافية بتصاميم فريدة وجذابة مثل هذه.</p>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>إنشاء التطبيقات</h3>
-                    <p>تطوير تطبيقات الهواتف الذكية لمنصتي أندرويد و iOS.</p>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="700">
-                    <div class="icon"><i class="fas fa-bolt"></i></div>
-                    <h3>إنشاء كونفيجات VPS</h3>
-                    <p>كونفيجات مدفوعة وسريعة لـ http custom, nV TUNNEL, zi VPN.</p>
-                </div>
-                <div class="service-card vip-card" data-aos="fade-up" data-aos-delay="900">
-    <div class="icon"><i class="fas fa-crown"></i></div>
-    <h3>مجموعة VIP للكونفيجات</h3>
-    <p>اشتراك شهري في مجموعة خاصة لأقوى وأحدث الكونفيجات المتجددة يوميًا.</p>
-</div>
-            </div>
-        </section>
-
-        <section class="section" id="portfolio">
-            <h2 class="section-title title-gold-glow" data-aos="fade-up">أبرز أعمالي</h2>
-            <div class="portfolio-grid">
-                                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100"><img src="images/vpsaccount.jpg" alt=""><div class="portfolio-overlay"><h3></h3></div></div>
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100"><img src="images/vps.jpg" alt=""><div class="portfolio-overlay"><h3></h3></div></div>
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200"><img src="images/vipgroupe.jpg" alt="صورة مشروع 2"><div class="portfolio-overlay"><h3></h3></div></div>
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="300"><img src="images/instagram.jpg" alt="صورة مشروع 3"><div class="portfolio-overlay"><h3></h3></div></div>
-                                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200"><img src="images/html.jpg" alt="صورة مشروع 2"><div class="portfolio-overlay"><h3></h3></div></div>
-            </div>
-        </section>
-
-        <section class="section" id="payment">
-            <h2 class="section-title" data-aos="fade-up">طرق الدفع المتاحة</h2>
-            <div class="payment-grid">
-                <div class="payment-method" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-money-bill-wave"></i><span>Cash+ / CIH</span></div>
-                <div class="payment-method" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-mobile-alt"></i><span>تعبئة Inwi</span></div>
-                <div class="payment-method" data-aos="fade-up" data-aos-delay="300"><i class="fab fa-paypal"></i><span>PayPal</span></div>
-                <div class="payment-method" data-aos="fade-up" data-aos-delay="400"><i class="fab fa-bitcoin"></i><span>Binance / USDT</span></div>
-            </div>
-        </section>
-        
-        <section class="section" id="contact">
-            <h2 class="section-title" data-aos="fade-up">هل أنت جاهز؟</h2>
-            <p class="contact-subtitle" data-aos="fade-up" data-aos-delay="100">تواصل معي عبر إحدى المنصات التالية ودعنا نحول فكرتك إلى حقيقة.</p>
-            <div class="contact-grid">
-                <a href="https://wa.me/message/PH7PSUTH25NZH1" target="_blank" class="contact-card whatsapp" data-aos="fade-up" data-aos-delay="200"><i class="fab fa-whatsapp"></i><span>واتساب</span></a>
-                <a href="https://wa.me/message/PH7PSUTH25NZH1" target="_blank" class="contact-card telegram" data-aos="fade-up" data-aos-delay="300"><i class="fab fa-telegram"></i><span>تيليجرام</span></a>
-                <a href="https://www.instagram.com/ai_moroco?igsh=MTdxazBnZDQ0Z3Uxeg==" target="_blank" class="contact-card instagram" data-aos="fade-up" data-aos-delay="400"><i class="fab fa-instagram"></i><span>انستغرام</span></a>
-                <a href="mailto:brokersmm1@gmail.com" class="contact-card email" data-aos="fade-up" data-aos-delay="500"><i class="fas fa-envelope"></i><span>البريد الإلكتروني</span></a>
-            </div>
-        </section>
-    </main>
     
-    <footer class="footer">
-        <p>&copy; 2025 | جميع الحقوق محفوظة لـ Broker SMM</p>
-    </footer>
+    <!-- Simple Stars Background -->
+    <div class="stars-background" id="starsBackground"></div>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading Portfolio<span class="loading-dots"></span></div>
+        <div class="loading-subtext">Crafting digital experiences</div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+    
+    <div class="header-container">
+        <header class="smart-header" id="smartHeader">
+            <h1 class="header-title">𝐁𝐫𝐨𝐤𝐞𝐫 𝐒𝐌𝐌</h1>
+        </header>
+    </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="script.js"></script>
+    <div class="orbital-gallery-container">
+        <div class="orbital-frame" id="orbitalFrame">
+             <img src="images/woman1.jpg" alt="Profile Image">
+             <img src="images/man1.jpg" alt="Profile Image">
+             <img src="images/woman2.jpg" alt="Profile Image">
+             <img src="images/mon.jpg" alt="Profile Image">
+             <img src="images/woman6.jpg" alt="Profile Image">
+             <img src="images/woman3.jpg" alt="Profile Image">
+             <img src="images/woman4.jpg" alt="Profile Image">
+             <img src="images/woman5.jpg" alt="Profile Image">
+             <img src="images/woman7.jpg" alt="Profile Image">
+             <img src="images/man4.jpg" alt="Profile Image">
+             <img src="images/man5.jpg" alt="Profile Image">
+             <img src="images/woman8.jpg" alt="Profile Image">
+             <img src="images/woman9.jpg" alt="Profile Image">
+        </div>
+    </div>
+    
+    <section class="portals-section">
+        <div class="swiper portals-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"> <a class="portal-card library" data-portal="library"> <i class='bx bxs-book-heart'></i> <h3>My Library</h3> </a> </div>
+                <div class="swiper-slide"> <a class="portal-card music" data-portal="music"> <i class='bx bxs-music'></i> <h3>My Playlist</h3> </a> </div>
+                <div class="swiper-slide"> <a class="portal-card travel" data-portal="travel"> <i class='bx bxs-plane-alt'></i> <h3>Travel Atlas</h3> </a> </div>
+                <div class="swiper-slide"> <a class="portal-card passion" data-portal="passion"> <i class='bx bxs-hot'></i> <h3>My Passion</h3> </a> </div>
+                <div class="swiper-slide"> <a class="portal-card hobbies" data-portal="hobbies"> <i class='bx bxs-star'></i> <h3>My Hobbies</h3> </a> </div>
+                <div class="swiper-slide"> <a class="portal-card skills" data-portal="skills"> <i class='bx bxs-wrench'></i> <h3>My Skills</h3> </a> </div>
+            </div>
+        </div>
+        
+        <!-- Content Display Area -->
+        <div class="content-display-area" id="contentDisplay">
+            <div class="portal-content library" id="library-content">
+                <h2><i class='bx bxs-book-heart'></i> My Library</h2>
+                <p>A curated collection of books that have influenced my thinking and contributed to my professional and personal growth.</p>
+                
+                <div class="content-grid">
+                    <div class="content-item">
+                        <img src="images/book_rich.jpg" alt="Rich Dad Poor Dad" class="book-cover">
+                        <h3><i class='bx bxs-book'></i> Rich Dad Poor Dad</h3>
+                        <div class="author">Robert Kiyosaki</div>
+                        <p>A book that changed my perspective on money and investing, teaching me to think like an entrepreneur and invest in assets rather than liabilities.</p>
+                    </div>
+                    
+                    <div class="content-item">
+                        <img src="images/Atomic_Habits.jpg" alt="Atomic Habits" class="book-cover">
+                        <h3><i class='bx bxs-book'></i> Atomic Habits</h3>
+                        <div class="author">James Clear</div>
+                        <p>One of the best books I've read about building habits, helping me develop a productive daily routine and achieve my goals step by step.</p>
+                    </div>
+                    
+                    <div class="content-item">
+                        <img src="images/philip.jpg" alt="Marketing 4.0" class="book-cover">
+                        <h3><i class='bx bxs-book'></i> Marketing 4.0</h3>
+                        <div class="author">Philip Kotler</div>
+                        <p>My essential guide to understanding digital marketing transformations and how to connect with customers in the modern era.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portal-content music" id="music-content">
+                <h2><i class='bx bxs-music'></i> My Playlist</h2>
+                <p>Music that inspires me during work and adds positive energy to my day.</p>
+                
+                <div class="content-grid">
+                    <div class="content-item">
+                        <h3><i class='bx bxs-playlist'></i> Focus Music</h3>
+                        <p>Calm music that helps me concentrate during programming and design.</p>
+                        
+                        <div class="music-item">
+                            <i class='bx bxs-music'></i>
+                            <div class="music-info">
+                                <h4>Lofi Hip Hop</h4>
+                                <p>Calm beats for focus and creativity</p>
+                            </div>
+                        </div>
+                        
+                        <div class="music-item">
+                            <i class='bx bxs-music'></i>
+                            <div class="music-info">
+                                <h4>Classical Piano</h4>
+                                <p>Classical music to calm the mind</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3><i class='bx bxs-playlist'></i> Morning Energy</h3>
+                        <p>An active playlist to start the day with positive energy.</p>
+                        
+                        <div class="music-item">
+                            <i class='bx bxs-music'></i>
+                            <div class="music-info">
+                                <h4>Pop Hits</h4>
+                                <p>Latest pop songs to energize the morning</p>
+                            </div>
+                        </div>
+                        
+                        <div class="music-item">
+                            <i class='bx bxs-music'></i>
+                            <div class="music-info">
+                                <h4>Electronic</h4>
+                                <p>Electronic music for motivation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portal-content travel" id="travel-content">
+                <h2><i class='bx bxs-plane-alt'></i> Travel Atlas</h2>
+                <p>My travel experiences and the places I dream of visiting in the future.</p>
+                
+                <div class="content-grid">
+                    <div class="content-item">
+                        <h3><i class='bx bxs-map'></i> Visited Countries</h3>
+                        <p>Countries I've had the pleasure of exploring and learning from their cultures.</p>
+                        <ul style="text-align: left; color: #ccc;">
+                            <li>United Arab Emirates</li>
+                            <li>Turkey</li>
+                            <li>Saudi Arabia</li>
+                            <li>Jordan</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3><i class='bx bxs-map-pin'></i> Dream Destinations</h3>
+                        <p>Places I hope to visit in the future to expand my horizons.</p>
+                        <ul style="text-align: left; color: #ccc;">
+                            <li>Japan - For its unique culture and technology</li>
+                            <li>Switzerland - For its stunning natural beauty</li>
+                            <li>United States - For its diverse landscapes</li>
+                            <li>Malaysia - For its rich cultural heritage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portal-content passion" id="passion-content">
+                <h2><i class='bx bxs-hot'></i> My Passion</h2>
+                <p>My journey in the world of digital marketing and social media management.</p>
+                
+                <div class="content-grid">
+                    <div class="content-item">
+                        <h3><i class='bx bxs-bullseye'></i> Digital Marketing</h3>
+                        <p>I specialize in creating effective marketing strategies that help businesses grow their online presence and reach their target audience.</p>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3><i class='bx bxs-user-voice'></i> Social Media Management</h3>
+                        <p>Managing social media platforms to build brand identity and engage with the audience effectively.</p>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3><i class='bx bxs-bar-chart-alt-2'></i> Content Strategy</h3>
+                        <p>Developing content plans that align with business goals and resonate with the target audience.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portal-content hobbies" id="hobbies-content">
+                <h2><i class='bx bxs-star'></i> My Hobbies</h2>
+                <p>Activities I enjoy during my free time that help me relax and develop new skills.</p>
+                
+                <div class="content-grid">
+                    <div class="content-item">
+                        <h3><i class='bx bxs-camera'></i> Photography</h3>
+                        <p>Capturing moments and scenes that tell stories, with a focus on nature and urban photography.</p>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3><i class='bx bxs-book-reader'></i> Reading</h3>
+                        <p>Exploring different worlds through books, with a preference for business, psychology, and self-development.</p>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3><i class='bx bxs-joystick'></i> Gaming</h3>
+                        <p>Playing strategy and adventure games that challenge my thinking and problem-solving skills.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portal-content skills" id="skills-content">
+                <h2><i class='bx bxs-wrench'></i> My Skills</h2>
+                <p>Professional skills I've developed through years of experience and continuous learning.</p>
+                
+                <div class="content-grid">
+                    <div class="content-item">
+                        <h3>Professional Skills</h3>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">Social Media Marketing</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%; background: var(--passion-color);"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">Content Creation</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%; background: var(--travel-color);"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">SEO Optimization</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%; background: var(--music-color);"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">Analytics & Reporting</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 88%; background: var(--library-color);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3>Technical Skills</h3>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">Adobe Creative Suite</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%; background: var(--hobbies-color);"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">WordPress</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 75%; background: var(--skills-color);"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">Google Analytics</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%; background: var(--passion-color);"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">HTML/CSS Basics</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 70%; background: var(--travel-color);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="moments-gallery-section">
+        <h2>Featured Moments</h2>
+        <div class="swiper moments-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" data-glow-color="#00d1ff">
+                    <img src="images/friends.jpg" alt="Creative Workspace">
+                    <div class="moment-card-content">
+                        <h3>Campfire Night</h3>
+                    </div>
+                </div>
+                <div class="swiper-slide" data-glow-color="#8e44ad">
+                    <img src="images/books_lern.jpg" alt="Marketing Strategy">
+                    <div class="moment-card-content">
+                        <h3>Avid Reader</h3>
+                    </div>
+                </div>
+                <div class="swiper-slide" data-glow-color="#e44d26">
+                    <img src="images/photografi.jpg" alt="Team Collaboration">
+                    <div class="moment-card-content">
+                        <h3>Passion Lens</h3>
+                    </div>
+                </div>
+                <div class="swiper-slide" data-glow-color="#1DB954">
+                    <img src="images/dog.jpg" alt="Business Meeting">
+                    <div class="moment-card-content">
+                        <h3>Loyal Companionship</h3>
+                    </div>
+                                    </div>
+                <div class="swiper-slide" data-glow-color="#8e44ad">
+                    <img src="images/bestfriend.jpg" alt="Marketing Strategy">
+                    <div class="moment-card-content">
+                        <h3>Romantic Warmth</h3>
+                    </div>
+                                    </div>
+                <div class="swiper-slide" data-glow-color="#8e44ad">
+                    <img src="images/yoga.jpg" alt="Marketing Strategy">
+                    <div class="moment-card-content">
+                        <h3>Sunset meditation</h3>
+                    </div>
+                                    </div>
+                <div class="swiper-slide" data-glow-color="#8e44ad">
+                    <img src="images/box.jpg" alt="Marketing Strategy">
+                    <div class="moment-card-content">
+                        <h3>Boxing Workout</h3>
+                    </div>
+                                    </div>
+                <div class="swiper-slide" data-glow-color="#8e44ad">
+                    <img src="images/gym.jpg" alt="Marketing Strategy">
+                    <div class="moment-card-content">
+                        <h3>Athletic Discipline</h3>
+                    </div>
+                                    </div>
+                <div class="swiper-slide" data-glow-color="#8e44ad">
+                    <img src="images/gaming.jpg" alt="Marketing Strategy">
+                    <div class="moment-card-content">
+                        <h3>Gaming Night</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <h2>Creative Projects</h2>
+        <div class="swiper projects-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Marketing Dashboard" class="project-card-image">
+                        <div class="project-card-content">
+                            <h3>Marketing Dashboard</h3>
+                            <p>Social media performance tracking dashboard.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Brand Strategy" class="project-card-image">
+                        <div class="project-card-content">
+                            <h3>Brand Strategy</h3>
+                            <p>Full startup brand and marketing strategy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Content Campaign" class="project-card-image">
+                        <div class="project-card-content">
+                            <h3>Content Campaign</h3>
+                            <p>3-month content campaign: 150% engagement boost.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-hub-card">
+            <h2>Let's Connect</h2>
+            <p>Feel free to reach out for collaborations or just a friendly hello!</p>
+            
+            <div class="social-buttons">
+                <a href="#" class="social-btn whatsapp"><i class='bx bxl-whatsapp'></i> WhatsApp</a>
+                <a href="#" class="social-btn instagram"><i class='bx bxl-instagram'></i> Instagram</a>
+                <a href="#" class="social-btn facebook"><i class='bx bxl-facebook'></i> Facebook</a>
+                <a href="#" class="social-btn fiverr"><i class='bx bxl-fiverr'></i> Fiverr</a>
+                <a href="#" class="social-btn telegram"><i class='bx bxl-telegram'></i> Telegram</a>
+                <a href="#" class="social-btn twitter"><i class='bx bxl-twitter'></i> Twitter</a>
+            </div>
+            
+            <p>Or send me an email at: <a href="mailto:contact@example.com" class="email-link">contact@example.com</a></p>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" id="closeLightbox">&times;</span>
+        <div class="lightbox-content">
+            <div class="lightbox-image-container">
+                <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            </div>
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Improved Loading Screen with Better Performance
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const progressBar = document.querySelector('.progress');
+            
+            // Simulate loading progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // Hide loading screen with smooth transition
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                        // Start stars animation after loading
+                        createStars();
+                    }, 500);
+                }
+                progressBar.style.width = progress + '%';
+            }, 200);
+            
+            // Initialize all components after loading
+            setTimeout(initializePage, 1000);
+        });
+
+        // Create stars background
+        function createStars() {
+            const starsContainer = document.getElementById('starsBackground');
+            const starCount = 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 3;
+                
+                // Random animation delay
+                const delay = Math.random() * 5;
+                
+                star.style.left = x + 'vw';
+                star.style.top = y + 'vh';
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.animationDelay = delay + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Initialize page components
+        function initializePage() {
+            initHeader();
+            initOrbitalGallery();
+            initPortals();
+            initSwipers();
+            initLightbox();
+            initScrollProgress();
+        }
+
+        // Sticky Header with Scroll Effect
+        function initHeader() {
+            const header = document.getElementById('smartHeader');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Orbital Profile Picture Gallery
+        function initOrbitalGallery() {
+            const orbitalFrame = document.getElementById('orbitalFrame');
+            const images = orbitalFrame.querySelectorAll('img');
+            let currentIndex = 0;
+            
+            // Set initial active image
+            images.forEach((img, index) => {
+                if (index === 0) {
+                    img.classList.add('active');
+                } else if (index === 1) {
+                    img.classList.add('next');
+                } else if (index === images.length - 1) {
+                    img.classList.add('prev');
+                } else {
+                    img.classList.remove('active', 'next', 'prev');
+                }
+            });
+            
+            // Auto-rotate images every 5 seconds
+            setInterval(() => {
+                navigateOrbital(1);
+            }, 7000);
+            
+            // Click to navigate
+            orbitalFrame.addEventListener('click', function(e) {
+                const rect = orbitalFrame.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const halfWidth = rect.width / 2;
+                
+                if (clickX > halfWidth) {
+                    navigateOrbital(1); // Next image
+                } else {
+                    navigateOrbital(-1); // Previous image
+                }
+            });
+            
+            function navigateOrbital(direction) {
+                images[currentIndex].classList.remove('active');
+                
+                if (direction === 1) {
+                    images[currentIndex].classList.add('prev');
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.remove('next', 'prev');
+                    images[currentIndex].classList.add('active');
+                    
+                    const nextIndex = (currentIndex + 1) % images.length;
+                    images[nextIndex].classList.remove('prev');
+                    images[nextIndex].classList.add('next');
+                    
+                    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+                    images[prevIndex].classList.remove('next');
+                    images[prevIndex].classList.add('prev');
+                } else {
+                    images[currentIndex].classList.add('next');
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    images[currentIndex].classList.remove('next', 'prev');
+                    images[currentIndex].classList.add('active');
+                    
+                    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+                    images[prevIndex].classList.remove('next');
+                    images[prevIndex].classList.add('prev');
+                    
+                    const nextIndex = (currentIndex + 1) % images.length;
+                    images[nextIndex].classList.remove('prev');
+                    images[nextIndex].classList.add('next');
+                }
+            }
+        }
+
+        // Portals Interaction
+        function initPortals() {
+            const portalCards = document.querySelectorAll('.portal-card');
+            const contentDisplay = document.getElementById('contentDisplay');
+            const portalContents = document.querySelectorAll('.portal-content');
+            
+            portalCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const portalType = this.getAttribute('data-portal');
+                    
+                    // Remove active class from all portals
+                    portalCards.forEach(c => c.classList.remove('active'));
+                    // Add active class to clicked portal
+                    this.classList.add('active');
+                    
+                    // Hide all portal contents
+                    portalContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show selected portal content
+                    const targetContent = document.getElementById(`${portalType}-content`);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                        contentDisplay.classList.add('expanded');
+                        
+                        // Animate skill bars when skills portal is opened
+                        if (portalType === 'skills') {
+                            setTimeout(animateSkillBars, 300);
+                        }
+                    }
+                });
+            });
+            
+            // Close content area when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.portal-card') && !e.target.closest('.portal-content')) {
+                    portalCards.forEach(c => c.classList.remove('active'));
+                    portalContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    contentDisplay.classList.remove('expanded');
+                }
+            });
+        }
+
+        // Animate skill bars
+        function animateSkillBars() {
+            const skillLevels = document.querySelectorAll('.skill-level');
+            skillLevels.forEach(level => {
+                const width = level.style.width;
+                level.style.width = '0%';
+                setTimeout(() => {
+                    level.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Initialize Swipers
+        function initSwipers() {
+            // Portals Swiper
+            const portalsSwiper = new Swiper('.portals-swiper', {
+                slidesPerView: 'auto',
+                spaceBetween: 10,
+                centeredSlides: true,
+                loop: true,
+                speed: 10000,
+                autoplay: {
+                    delay: 6000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    480: { spaceBetween: 15 },
+                    768: { spaceBetween: 20 },
+                    1024: { spaceBetween: 25 }
+                }
+            });
+            
+            // Moments Swiper
+            const momentsSwiper = new Swiper('.moments-swiper', {
+                slidesPerView: 'auto',
+                centeredSlides: true,
+                spaceBetween: 20,
+                loop: true,
+                speed: 800,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                on: {
+                    slideChangeTransitionStart: function() {
+                        const activeSlide = this.slides[this.activeIndex];
+                        const glowColor = activeSlide.getAttribute('data-glow-color') || '#fff';
+                        activeSlide.style.setProperty('--glow-color', glowColor);
+                    }
+                }
+            });
+            
+            // Projects Swiper
+            const projectsSwiper = new Swiper('.projects-swiper', {
+                slidesPerView: 'auto',
+                centeredSlides: true,
+                spaceBetween: 30,
+                loop: true,
+                speed: 600,
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                }
+            });
+        }
+
+        // Lightbox for Images
+        function initLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const closeLightbox = document.getElementById('closeLightbox');
+            
+            // Add click event to moment images
+            const momentImages = document.querySelectorAll('.moments-swiper .swiper-slide');
+            momentImages.forEach(slide => {
+                slide.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    const caption = this.querySelector('h3').textContent;
+                    
+                    lightboxImage.src = imgSrc;
+                    lightboxCaption.textContent = caption;
+                    lightbox.classList.add('show');
+                });
+            });
+            
+            // Close lightbox
+            closeLightbox.addEventListener('click', function() {
+                lightbox.classList.remove('show');
+            });
+            
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('show');
+                }
+            });
+        }
+
+        // Scroll Progress Bar
+        function initScrollProgress() {
+            window.addEventListener('scroll', function() {
+                const winHeight = window.innerHeight;
+                const docHeight = document.documentElement.scrollHeight;
+                const scrollTop = window.pageYOffset;
+                const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+                
+                document.querySelector('.progress').style.width = scrollPercent + '%';
+            });
+        }
+    </script>
 </body>
 </html>
